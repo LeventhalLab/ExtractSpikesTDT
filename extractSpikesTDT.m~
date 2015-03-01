@@ -97,23 +97,23 @@ snle_T           = 5;
          case 'snle_period',
              snle_T = varargin{iarg + 1};
          case 'override_nas_path'
-             override_nas_path = varargin{iarg + 1};
+             session_conf = varargin{iarg + 1};
      end
  end
 
-if empty(override_nas_path)
+if empty(session_conf)
     [~, ratID] = sql_getSubjectFromSession(sessionName);
     chMap = sql_getChannelMap(ratID);
     nasPath = sql_findNASpath(ratID);
 else
-    nasPath = override_nas_path;
-    [f,p] = uigetfile({'.mat'},'Select the configuration file...');
-    load(fullfile(p,f));
+    load(session_conf_);
 end
 
 if isempty(tetrodeList); tetrodeList = chMap.tetNames; end
 if ~iscell(tetrodeList); tetrodeList = {tetrodeList}; end
-             
+
+
+                      
 sessionTDTpath       = fullfile(nasPath, ratID, [ratID '-rawdata'], sessionName, sessionName);
 processedSessionPath = fullfile(nasPath, ratID, [ratID '-processed']);
 
