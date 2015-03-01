@@ -1,0 +1,18 @@
+function exportSessionConf(sessionName)
+%
+% This function exports a configuration file for a session so
+% that processing can be offloaded to a non-networked machine
+
+hostIP = '172.20.138.142';
+user = 'dleventh';
+password = 'amygdala_probe';
+dbName = 'spikedb';
+
+sqlArgs = {sessionName, ...
+            'hostip', hostIP, ...
+            'user', user, ...
+            'password', password, ...
+            'dbname', dbName
+           };
+
+[~, ratID] = sql_getSubjectFromSession(qlArg);

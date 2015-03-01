@@ -31,14 +31,6 @@ function extractSpikesTDT(sessionName, varargin)
 %   readHSD
 %   wavefilter
 
-
-%%%%%%%%%%%%%%channel map is pulled out from a database channelMap table.%%%%%%%%%%%%%%
-javaaddpath('C:\Program Files\MATLAB\R2013a\java\jarext\mysql-connector-java-5.0.8\mysql-connector-java-5.0.8-bin.jar')
-hostIP = '172.20.138.142';
-user = 'dleventh';
-password = 'amygdala_probe';
-dbName = 'spikedb';
-
 tetrodeList      = {};
 rel_threshold    = 4.5;   % in units of standard deviation
 numSigmaSegments = 60;  % number of segments to use to calculate the standard deviation of the signal on each wire
@@ -106,6 +98,12 @@ snle_T           = 5;
              snle_T = varargin{iarg + 1};
      end
  end
+% is javaaddpath still needed?
+%javaaddpath('C:\Program Files\MATLAB\R2013a\java\jarext\mysql-connector-java-5.0.8\mysql-connector-java-5.0.8-bin.jar')
+hostIP = '172.20.138.142';
+user = 'dleventh';
+password = 'amygdala_probe';
+dbName = 'spikedb';
 
 [~, ratID] = sql_getSubjectFromSession(sessionName, ...
                                        'hostip', hostIP, ...
@@ -130,18 +128,6 @@ nasPath = sql_findNASpath(ratID, ...
 sessionTDTpath       = fullfile(nasPath, ratID, [ratID '-rawdata'], sessionName, sessionName);
 processedSessionPath = fullfile(nasPath, ratID, [ratID '-processed']);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% cd(sessionTDTpath);
-% dirs=dir('*.sev');
-% sevfile = dirs(2).name;
-% [sev, header] = read_tdt_sev(sevfile);
-% header.name = sevfile;
-% %BELOW ADDED BY VIBIN, not sure if it's correct%
-% if header.Fs == 0
-%     header.Fs = 24414.0625;
-% end
-% %end section added by Vibin
 
 if ~exist(processedSessionPath, 'dir')
     mkdir(processedSessionPath);            % defined above after nasPath extracted from the sql db

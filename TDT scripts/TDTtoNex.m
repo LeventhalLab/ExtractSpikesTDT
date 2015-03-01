@@ -1,4 +1,8 @@
-%this function creates converts TDTtank into a nex file
+function nexData = TDTtoNex_20141204(sessionName, varargin)
+%
+% usage:
+%
+%this function converts TDTtank files into a nex file
 %output nexData.data with all header fields from the tsq file
 %       nexData.raw represents all the fields from the raw data
 %       nexData.events represents all the events that we recorded in
@@ -10,18 +14,70 @@
 % 		nexData.tbeg
 % 		nexData.events
 % 	    nexData.tbeg
+%
+% INPUTS:
+%   tevName - name of the .tev file to use
+%   tsqName - name of the .tsq file to use
+%
+% OUTPUTS:
+%   none
 
-function nexData = TDTtoNex()
+javaaddpath('C:\Program Files\MATLAB\R2013a\java\jarext\mysql-connector-java-5.0.8\mysql-connector-java-5.0.8-bin.jar')
+hostIP = '172.20.138.142';
+user = 'dleventh';
+password = 'amygdala_probe';
+dbName = 'spikedb';
 
-filenameTev = dir('*.tev');
-filenameTsq = dir('*.tsq');
+for iarg = 1 : 2 : nargin - 1
+    switch lower(varargin{iarg})
+        case 'hostip'
+         hostIP = varargin{iarg + 1};
+        case 'user',
+         user = varargin{iarg + 1};
+        case 'password',
+         password = varargin{iarg + 1};
+        case 'dbname',
+         dbName = varargin{iarg + 1};
+        case 'sqljava_version',
+         sqlJava_version = varargin{iarg + 1};
+    end
+end
+ 
+[~, ratID] = sql_getSubjectFromSession(sessionName, ...
+                                       'hostip', hostIP, ...
+                                       'user', user, ...
+                                       'password', password, ...
+                                       'dbname', dbName);
+nasPath = sql_findNASpath(ratID, ...
+                          'hostip', hostIP, ...
+                          'user', user, ...
+                          'password', password, ...
+                          'dbname', dbName);
+sessionTDTpath       = fullfile(nasPath, ratID, [ratID '-rawdata'], sessionName, sessionName);
+processedSessionPath = fullfile(nasPath, ratID, [ratID '-processed'], sessionName);
 
+cd(sessionTDTpath);
+tevInfo = dir('*.tev');
+if isempty(tevInfo)
+    error('TDTtoNex_20141204:noTevFile', ['no tev file found for session ' sessionName]);
+end
+if length(tevInfo) > 1
+    error('TDTtoNex_20141204:multipleTevFiles', ['more than one tev file found for session ' sessionName]);
+end
+tsqInfo = dir('*.tsq');
+if isempty(tsqInfo)
+    error('TDTtoNex_20141204:noTsqFile', ['no tsq file found for session ' sessionName]);
+end
+if length(tsqInfo) > 1
+    error('TDTtoNex_20141204:multipleTsqFiles', ['more than one tsq file found for session ' sessionName]);
+end
+tevName = fullfile(sessionTDTpath, tevInfo.name);
+tsqName = fullfile(sessionTDTpath, tsqInfo.name);
 
 store_id2 = 'Vide';
 store_id = 'Wave';  % this is just an example
-tev = fopen(filenameTev.name);
-tsq = fopen(filenameTsq.name); fseek(tsq, 0, 'eof'); ntsq = ftell(tsq)/40; fseek(tsq, 0, 'bof');
-
+tev = fopen(tevName);
+tsq = fopen(tsqName); fseek(tsq, 0, 'eof'); ntsq = ftell(tsq)/40; fseek(tsq, 0, 'bof');
 
 %read from tsq
 nexData.data.size      = fread(tsq, [ntsq 1], 'int32',  36); fseek(tsq,  4, 'bof');
@@ -101,15 +157,14 @@ end
     			 'foodOn','foodOff', 'line08On','line08Off', 'nose1In', 'nose1Out', 'nose2In', 'nose2Out', ...
     			 'nose3In', 'nose3Out', 'nose4In', 'nose4Out','nose5In', 'nose5Out', 'foodportOn', 'foodportOff','line15On','line15Off', ...
     			 'line16On','line16Off', 'tone1On','tone1Off', 'tone2On','tone2Off', 'line19On', 'line19Off', 'gotrialOn','gotrialOff', 'line21On', 'line21Off', 'line22On', 'line22Off', ...
-    			 'line23On', 'line23Off', 'videoOn', 'videoOff', 'line25On', 'line25Off', 'line26On', 'line26Off', 'line27On', 'line27Off', 'line28On', 'line28Off', ...
-    			 'line29On', 'line29Off', 'line30On', 'line30Off','line31On', 'line31Off','line32On', 'line32Off',};
+    			 'line23On', 'line23Off', 'videoOn', 'videoOff'};
 
 
 	
 		% Set up the NEX file data structure
 		nexData.version = 1;
 		nexData.comment = 'Converted TDTtoNex. Alex Zotov, 2013';
-		nexData.freq = 24440;
+		nexData.freq = 24440;                   % THIS NEEDS TO BE CHANGED TO THE ACTUAL SAMPLING RATE!
 		nexData.tbeg = 0;
 		nexData.events = {};
 	    nexData.tbeg = nexData.data.timestamp(2);
@@ -210,11 +265,9 @@ nexData.events{48}.name = 'videoOff';
 nexData.events{47}.timestamps = nexData2.events{51}.timestamps;
 nexData.events{48}.timestamps = nexData2.events{52}.timestamps;
 
-
 nexData.events = nexData.events';
 nexData.tend = nexData.raw.chan_info(end,1);
-rewrite=filenameTev.name;
-rewrite=rewrite(1:end-4);
-writeNexFile(nexData, [rewrite '.nex']);
+rewrite=fullfile(processedSessionPath,[sessionName '.box.nex']);
+writeNexFile(nexData, rewrite);
 fclose(tev);
 fclose(tsq);
