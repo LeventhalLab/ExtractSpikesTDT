@@ -43,9 +43,7 @@ if isempty(find(validMask, 1))
 end
 
 for iarg = 1 : 2 : nargin - 6
-    
     switch lower(varargin{iarg})
-
         case 'machineformat',
             machineFormat = varargin{iarg + 1};
         case 'snlewindow',

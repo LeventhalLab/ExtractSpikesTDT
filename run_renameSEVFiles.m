@@ -1,5 +1,5 @@
 % require format: RZZZZ_YYYYMMDDX-N_data_ch??.sev
-dataDir = '\\172.20.138.142\RecordingsLeventhal2\ChoiceTask\R0036\R0036-rawdata\R0036_20150225a\data - 2015-02-25 12_23_07'; %CHANGE THIS 1/2
+dataDir = '/Users/mattgaidica/Documents/Data/ChoiceTask/R0036/R0036-rawdata/R0036_20150225a/R0036_20150225a'; %CHANGE THIS 1/2
 baseName = 'R0036_20150225a_data_'; %CHANGE THIS 2/2
 dirFiles = dir(fullfile(dataDir,'*.sev'));
 

@@ -218,7 +218,7 @@ count3=0;
 
 %             MakeQTMovie('start',qtname)
 %             MakeQTMovie('quality', 0.1);
-for iBlock = 1:1%%%%%%%%%!!!!!!!!!!!!!!!!!!numBlocks
+for iBlock = 1:3
     count3=count3+1;
     disp(sprintf('Extracting waveforms for %s, block %d of %d', ...
                  tetName, ...
