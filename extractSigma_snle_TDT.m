@@ -134,12 +134,14 @@ totSamples = chunkSize * numSigmaSegments;
 wireSamps = zeros(totSamples,numCh);
 
 for iCh = 1 : numCh
+    disp(['Current channel: ',num2str(iCh)]);
     if validMask(iCh)        
         [sev, ~] = read_tdt_sev(sevNames{iCh});    
         wireSampIdx = 1;
         readStartSamp = 1;
         readStopSamp = chunkSize;
         for iChunk = 1 : numSigmaSegments
+            disp(['iChunk: ',num2str(iChunk)]);
             temp = sev(readStartSamp : readStopSamp);
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);
             temp = wavefilter(temp', maxLevel);
