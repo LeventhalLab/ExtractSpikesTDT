@@ -5,6 +5,20 @@ ant:
   <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_redistribution_files_only" />
 </ant>
 mcc -C -o extractSpikesTDT -W WinMain:extractSpikesTDT -T link:exe -d C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing -v C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m -a C:\Users\admin\Documents\MATLAB\MySQLTools\mysql.mat 
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\EEGPlot
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\data
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\spikeExtraction\matlab spikeworks
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\Matlab Offline Files SDK\Samples
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\Matlab Offline Files SDK\mexPlex\tests
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\SampleData
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\ddtReader_MFC\res
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\ddtReader_Win32_Console
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\doc
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\plxReader_MFC\res
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\plxReader_Win32_Console
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\plxVTdecoder_MFC\res
+Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\utilities\thirdparty\PLX & DDT Offline Files SDK\plxVTdecoder_Win32_Console
+Name is nonexistent or not a directory: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\matlab spikeworks
 Compiler version: 5.2 (R2014b)
 Dependency analysis by REQUIREMENTS.
 [Warning: Adding path "C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT" to
