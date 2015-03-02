@@ -219,7 +219,19 @@ count3=0;
 
 %             MakeQTMovie('start',qtname)
 %             MakeQTMovie('quality', 0.1);
-for iBlock = 1:10%numBlocks
+
+sevs = [];
+for iCh = 1 : numCh
+    if validMask(iCh)
+        disp(['Building sev for ch',num2str(iCh)]);
+        [sevs(iCh,:), ~] = read_tdt_sev(sevNames{iCh});
+    end
+end
+    
+
+PLXdata = {};
+numBlocks = 10;
+parfor iBlock = 1:numBlocks
     count3=count3+1;
     disp(sprintf('Extracting waveforms for %s, block %d of %d', ...
                  tetName, ...
@@ -248,8 +260,7 @@ for iBlock = 1:10%numBlocks
     rawData = zeros(numCh, (stopSample - startSample + 1));
     for iCh = 1 : numCh
         if validMask(iCh)
-            [sev, ~] = read_tdt_sev(sevNames{iCh}); 
-            rawData(iCh, :) = sev(startSample : stopSample);
+            rawData(iCh, :) = sevs(iCh,startSample : stopSample);
         end
     end
 
@@ -303,11 +314,14 @@ for iBlock = 1:10%numBlocks
     if isempty(ts); continue; end
 
     waveforms = extractWaveforms(fdata, block_ts, final_peakLoc, final_waveLength);
-    
     ts = ts + upsampled_curSamp;
     
-    %to use parfor, does this need to happen in order?
-    writePLXdatablock(PLXid, waveforms, ts);    
+    PLXdata{iBlock} = {waveforms ts};
+    %PLXdata{iBlock,2} = ts;   
+end
+disp('parfor ended');
+for iBlock=1:numBlocks
+    writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
 end
 
 fclose(PLXid);
