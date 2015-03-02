@@ -11,6 +11,8 @@ chMap = sql_getChannelMap(ratID);
 % you can pass tetrodes into extractSpikesTDT, assume you can't
 % do it here (the DB needs to be populated)
 tetrodeList = chMap.tetNames;
+validMasks = sql_getAllTetChannels(sessionName);
 
 filename = ['session_conf_',sessionName,'.mat'];
-save(fullfile(saveDir,filename),'chMap','ratID','tetrodeList');
+save(fullfile(saveDir,filename),...
+    'chMap','ratID','tetrodeList','validMasks');

@@ -24,14 +24,10 @@ ts = ts(ts > peakLoc + 1);
 ts = ts(ts < (numSamples + peakLoc - waveLength));
 
 numSpikes = length(ts);
-
 waveforms = zeros(numSpikes, waveLength, numWires);
 
 for i_ts = 1 : numSpikes
-    
     waveStart = ts(i_ts) - peakLoc + 1;
     waveEnd   = ts(i_ts) - peakLoc + waveLength;
-    
     waveforms(i_ts, :, :) = data(:, waveStart : waveEnd)';
-    
 end
