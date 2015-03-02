@@ -131,7 +131,6 @@ if padLength < 0
 end
 
 totSamples = chunkSize * numSigmaSegments;
-
 wireSamps = zeros(totSamples,numCh);
 
 for iCh = 1 : numCh
@@ -152,7 +151,7 @@ for iCh = 1 : numCh
             readStartSamp = readStartSamp + chunkSize + padLength;
             readStopSamp = readStartSamp + chunkSize-1;
         end
-    end    % if validMask(iCh)
+    end
 end
 
 wireSamps(wireSamps > maxSNLE) = NaN;
