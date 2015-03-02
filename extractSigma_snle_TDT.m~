@@ -131,8 +131,8 @@ if padLength < 0
     end
 end
 
-% totSamples = chunkSize * numSigmaSegments;
-%allWireSamps = zeros(totSamples,numCh);
+totSamples = chunkSize * numSigmaSegments;
+allWireSamps = zeros(totSamples,numCh);
 %recombineIdxs = zeros(numSigmaSegments,2);
 
 % wireSampIdx = 1;
@@ -154,7 +154,7 @@ for iCh = 1 : numCh
     disp(['Current channel: ',num2str(iCh)]);
     if validMask(iCh)        
         [sev, ~] = read_tdt_sev(sevNames{iCh});    
-        parfor iChunk = 1 : numSigmaSegments
+        for iChunk = 1 : numSigmaSegments
             disp(['iChunk: ',num2str(iChunk)]);
             temp = sev(readSamps(iChunk,1) : readSamps(iChunk,2));
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);
