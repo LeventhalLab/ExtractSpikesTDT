@@ -131,17 +131,11 @@ if padLength < 0
     end
 end
 
-% totSamples = chunkSize * numSigmaSegments;
-%allWireSamps = zeros(totSamples,numCh);
-%recombineIdxs = zeros(numSigmaSegments,2);
 
-% wireSampIdx = 1;
-% readStartSamp = 1;
-% readStopSamp = chunkSize;
-
-%wireSampIdx = 1;
-
-%row1=start, row2=stop
+% I don't think it matters that we reconstruct the signal for this
+% stage, so in that case we can parallel process and then just take
+% the median of the chunks afterwards
+% row1=start, row2=stop
 readSamps = zeros(numSigmaSegments,2);
 readSamps(1,:) = [1 chunkSize];
 
@@ -162,16 +156,9 @@ for iCh = 1 : numCh
             SNLEdata = snle(temp, 1, ...
                              'windowsize', windowSize, ...
                              'snle_period', snle_T);
-            %recombineIdxs(iChunk,:) = [wireSampIdx wireSampIdx + chunkSize * r_upsample - 1];
-%             wireSamps(wireSampIdx : wireSampIdx + chunkSize * r_upsample - 1, iCh) = SNLEdata;
-%             wireSampIdx = wireSampIdx + chunkSize * r_upsample;
-%             readStartSamp = readStartSamp + chunkSize + padLength;
-%             readStopSamp = readStartSamp + chunkSize-1;
             wireSamps(iChunk,:) = SNLEdata;
         end
         allWireSamps(:,iCh) = wireSamps(:);
-        % does chunk placement (in order) even matter? I don't
-        % think so? do we need recombineIdxs then?
     end
 end
 
