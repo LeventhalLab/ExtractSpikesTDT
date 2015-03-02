@@ -186,7 +186,8 @@ plxInfo.SlowMaxMagnitudeMV  = 10000;    % +/- 1 V dynamic range on DAQ cards (pr
 plxInfo.SpikePreAmpGain     = 1;        % gain before final amplification stage
 
 PLXid = fopen(PLX_fn, 'w');
-writePLXheader( PLXid, plxInfo );
+disp('PLX file opened...')
+writePLXheader(PLXid, plxInfo );
 
 % subjectName = strrep(header.name(1:end-9), '-', '');   % get rid of any hyphens in the subject name
 % dateString  = sprintf('%04d%02d%02d', plxInfo.year, plxInfo.month, plxInfo.day);
@@ -208,7 +209,7 @@ for iCh = 1 : length(chList)
     chInfo.sortWidth = final_waveLength;
     chInfo.comment   = 'created by extractSpikesTDT.m';
 
-    writePLXChanHeader( PLXid, chInfo );
+    writePLXChanHeader(PLXid, chInfo );
 end
 
 count3=0;
@@ -218,7 +219,7 @@ count3=0;
 
 %             MakeQTMovie('start',qtname)
 %             MakeQTMovie('quality', 0.1);
-for iBlock = 1:3 %numblocks
+for iBlock = 1:10%numBlocks
     count3=count3+1;
     disp(sprintf('Extracting waveforms for %s, block %d of %d', ...
                  tetName, ...
@@ -305,9 +306,11 @@ for iBlock = 1:3 %numblocks
     
     ts = ts + upsampled_curSamp;
     
-    writePLXdatablock( PLXid, waveforms, ts);    
+    %to use parfor, does this need to happen in order?
+    writePLXdatablock(PLXid, waveforms, ts);    
 end
 
 fclose(PLXid);
+disp('PLX file closed...');
 
 end
