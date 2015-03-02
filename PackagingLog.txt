@@ -1,0 +1,28 @@
+ant:
+<ant>
+  <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_redistribution" />
+  <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing" />
+  <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_redistribution_files_only" />
+</ant>
+mcc -C -a C:\Users\admin\Documents\MATLAB\mysql-connector-java-5.1.34-bin.jar -o extractSpikesTDT -W WinMain:extractSpikesTDT -T link:exe -d C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing -v C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m 
+[Warning: "mysql-connector-java-5.1.34-bin.jar" is already specified on static
+java path.] 
+[> In javaclasspath>local_validate_dynamic_path at 293
+  In javaclasspath>local_javapath at 182
+  In javaclasspath at 119
+  In javaaddpath at 69] 
+Compiler version: 5.2 (R2014b)
+Dependency analysis by REQUIREMENTS.
+[Warning: Adding path "C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT" to
+Compiler path instance.] 
+Parsing file "C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 0 temporary MEX authorization files.
+Generating file "C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\readme.txt".
+Packaging...
+Adding custom icon C:\Program Files\MATLAB\R2014b\toolbox\compiler\Resources\default_icon.ico to C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\extractSpikesTDT.exe.
+Attempting to embed the CTF archive into the application C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\extractSpikesTDT.exe.
+Finished embedding CTF archive. Deleting the external CTF archive.
+Creating the bundle...
+Web based installer created at C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
