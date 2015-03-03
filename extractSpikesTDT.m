@@ -118,6 +118,16 @@ for iTet = 1 : length(tetrodeList)
     end
 end
 
+% turn on parallel worker pool
+poolobj = parpool('local');
+
+if isempty(poolobj)
+    poolsize = 0;
+else
+    poolsize = poolobj.NumWorkers
+end
+disp(['Pool size: ',num2str(poolsize)]);
+
 tetChannels = tetChannels(1:numValidTets, :);
 tetWireStd = zeros(numValidTets, 4);
 parfor iTet = 1 : numValidTets
