@@ -148,7 +148,7 @@ tet_thresholds  = rel_threshold * tetWireStd;
 % signal on each relevant wire - now time to do the thresholding!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for iTet = 1 : length(tetrodeList)
+parfor iTet = 1 : length(tetrodeList)
      % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
