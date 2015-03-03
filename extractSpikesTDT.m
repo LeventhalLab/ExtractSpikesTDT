@@ -130,7 +130,7 @@ disp(['Pool size: ',num2str(poolsize)]);
 
 tetChannels = tetChannels(1:numValidTets, :);
 tetWireStd = zeros(numValidTets, 4);
-for iTet = 1 : numValidTets
+parfor iTet = 1 : numValidTets
     % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
