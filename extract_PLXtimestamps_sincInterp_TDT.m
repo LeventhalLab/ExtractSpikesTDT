@@ -310,15 +310,15 @@ for iBlock = 1:numBlocks
 
     waveforms = extractWaveforms(fdata, block_ts, final_peakLoc, final_waveLength);
     ts = ts + upsampled_curSamp;
-%     writePLXdatablock(PLXid, waveforms, ts);
+    writePLXdatablock(PLXid, waveforms, ts);
 
-    PLXdata{iBlock} = {waveforms ts};
+%     PLXdata{iBlock} = {waveforms ts}; % for parallel processing
 end
 
 %tried this for parallel processing
-for iBlock=1:numBlocks-1
-    writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
-end
+% for iBlock=1:numBlocks
+%     writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
+% end
 
 fclose(PLXid);
 disp('PLX file closed...');
