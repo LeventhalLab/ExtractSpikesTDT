@@ -38,45 +38,45 @@ endTime          = 0;
 override_nas_path = '';
 override_conf_path = '';
 
-snle_T           = 5;
- for iarg = 1 : 2 : nargin - 1
-     switch lower(varargin{iarg})
-         case 'tetrodelist',
-             tetrodeList = varargin{iarg + 1};
-         case 'threshold',
-             rel_threshold = varargin{iarg + 1};
-         case 'numsigmasegments',
-             numSigmaSegments = varargin{iarg + 1};
-         case 'machineformat',
-             machineFormat = varargin{iarg + 1};
-         case 'upsampleratio',
-             r_upsample = varargin{iarg + 1};
-         case 'wavelength',
-             waveLength = varargin{iarg + 1};
-         case 'peakloc',
-             peakLoc = varargin{iarg + 1};
-         case 'deadtime',
-             deadTime = varargin{iarg + 1};
-         case 'overlaptolerance',
-             overlapTolerance = varargin{iarg + 1};
-         case 'maxsnle',
-             maxSNLE = varargin{iarg + 1};
-         case 'sincinterp_cutoff_fs',
-            cutoff_Fs = varargin{iarg + 1};
-         case 'starttime',
-             startTime = varargin{iarg + 1};            % added in to make it possible to set start and end times for processing (for example, in case there was a long period before recording was initiated after turning on the software).
-         case 'endtime',                                % this functionality has not been added to the code yet, though. -DL 12/15/2014
-             endTime = varargin{iarg + 1};
-         case 'snlewindow',
-             snle_window = varargin{iarg + 1};
-         case 'snle_period',
-             snle_T = varargin{iarg + 1};
-         case 'override_nas_path'
-             override_nas_path = varargin{iarg + 1};
-         case 'override_conf_path'
-             override_conf_path = varargin{iarg + 1};
+snle_T = 5;
+for iarg = 1 : 2 : nargin - 1
+ switch lower(varargin{iarg})
+     case 'tetrodelist',
+         tetrodeList = varargin{iarg + 1};
+     case 'threshold',
+         rel_threshold = varargin{iarg + 1};
+     case 'numsigmasegments',
+         numSigmaSegments = varargin{iarg + 1};
+     case 'machineformat',
+         machineFormat = varargin{iarg + 1};
+     case 'upsampleratio',
+         r_upsample = varargin{iarg + 1};
+     case 'wavelength',
+         waveLength = varargin{iarg + 1};
+     case 'peakloc',
+         peakLoc = varargin{iarg + 1};
+     case 'deadtime',
+         deadTime = varargin{iarg + 1};
+     case 'overlaptolerance',
+         overlapTolerance = varargin{iarg + 1};
+     case 'maxsnle',
+         maxSNLE = varargin{iarg + 1};
+     case 'sincinterp_cutoff_fs',
+        cutoff_Fs = varargin{iarg + 1};
+     case 'starttime',
+         startTime = varargin{iarg + 1};            % added in to make it possible to set start and end times for processing (for example, in case there was a long period before recording was initiated after turning on the software).
+     case 'endtime',                                % this functionality has not been added to the code yet, though. -DL 12/15/2014
+         endTime = varargin{iarg + 1};
+     case 'snlewindow',
+         snle_window = varargin{iarg + 1};
+     case 'snle_period',
+         snle_T = varargin{iarg + 1};
+     case 'override_nas_path'
+         override_nas_path = varargin{iarg + 1};
+     case 'override_conf_path'
+         override_conf_path = varargin{iarg + 1};
      end
- end
+end
 
  % override_nas_path determines whether or not MySQL is used, or
  % if the code will rely on a configuration file created by
@@ -118,9 +118,19 @@ for iTet = 1 : length(tetrodeList)
     end
 end
 
+% turn on parallel worker pool
+poolobj = parpool('local');
+
+if isempty(poolobj)
+    poolsize = 0;
+else
+    poolsize = poolobj.NumWorkers;
+end
+disp(['Pool size: ',num2str(poolsize)]);
+
 tetChannels = tetChannels(1:numValidTets, :);
 tetWireStd = zeros(numValidTets, 4);
-for iTet = 1 : numValidTets
+parfor iTet = 1 : numValidTets
     % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
@@ -148,9 +158,10 @@ tet_thresholds  = rel_threshold * tetWireStd;
 % signal on each relevant wire - now time to do the thresholding!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for iTet = 1 : length(tetrodeList)
+parfor iTet = 1 : length(tetrodeList)
      % check for valid channels
     if ~any(validMasks(iTet,:))
+        disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
         continue;
     end
     

@@ -59,8 +59,8 @@ for iarg = 1 : 2 : nargin - 6
             cutoff_Fs = varargin{iarg + 1};
         case 'starttime',
             startTime = varargin{iarg + 1};            % added in to make it possible to set start and end times for processing (for example, in case there was a long period before recording was initiated after turning on the software).
-%         case 'endtime',                                % this functionality has not been added to the code yet, though. -DL 12/15/2014
-%             endTime = varargin{iarg + 1};
+        case 'endtime',                                % this functionality has not been added to the code yet, though. -DL 12/15/2014
+            endTime = varargin{iarg + 1};
         case 'snle_period',
             snle_T = varargin{iarg + 1};
     end
