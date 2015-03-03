@@ -81,6 +81,7 @@ end
  % override_nas_path determines whether or not MySQL is used, or
  % if the code will rely on a configuration file created by
  % exportSessionConf
+ % !!!CHANGE!!! don't use MySQL if there's a conf
 if isempty(override_nas_path)
     [~, ratID] = sql_getSubjectFromSession(sessionName);
     chMap = sql_getChannelMap(ratID);
