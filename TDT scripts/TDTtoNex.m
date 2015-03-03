@@ -1,4 +1,4 @@
-function nexData = TDTtoNex_20141204(sessionName, varargin)
+function nexData = TDTtoNex(sessionName, varargin)
 %
 % usage:
 %
@@ -22,37 +22,10 @@ function nexData = TDTtoNex_20141204(sessionName, varargin)
 % OUTPUTS:
 %   none
 
-javaaddpath('C:\Program Files\MATLAB\R2013a\java\jarext\mysql-connector-java-5.0.8\mysql-connector-java-5.0.8-bin.jar')
-hostIP = '172.20.138.142';
-user = 'dleventh';
-password = 'amygdala_probe';
-dbName = 'spikedb';
+[~, ratID] = sql_getSubjectFromSession(sessionName);
+% nasPath = sql_findNASpath(ratID);
+nasPath = '/Users/mattgaidica/Documents/Data/ChoiceTask';
 
-for iarg = 1 : 2 : nargin - 1
-    switch lower(varargin{iarg})
-        case 'hostip'
-         hostIP = varargin{iarg + 1};
-        case 'user',
-         user = varargin{iarg + 1};
-        case 'password',
-         password = varargin{iarg + 1};
-        case 'dbname',
-         dbName = varargin{iarg + 1};
-        case 'sqljava_version',
-         sqlJava_version = varargin{iarg + 1};
-    end
-end
- 
-[~, ratID] = sql_getSubjectFromSession(sessionName, ...
-                                       'hostip', hostIP, ...
-                                       'user', user, ...
-                                       'password', password, ...
-                                       'dbname', dbName);
-nasPath = sql_findNASpath(ratID, ...
-                          'hostip', hostIP, ...
-                          'user', user, ...
-                          'password', password, ...
-                          'dbname', dbName);
 sessionTDTpath       = fullfile(nasPath, ratID, [ratID '-rawdata'], sessionName, sessionName);
 processedSessionPath = fullfile(nasPath, ratID, [ratID '-processed'], sessionName);
 

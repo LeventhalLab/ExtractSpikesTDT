@@ -141,23 +141,22 @@ end
 % row1=start, row2=stop
 readSamps = zeros(numSigmaSegments,2);
 readSamps(1,:) = [1 chunkSize];
-
 for iChunk = 2 : numSigmaSegments
     readSamps(iChunk,1) = readSamps(iChunk-1,1)+chunkSize+padLength;
     readSamps(iChunk,2) = readSamps(iChunk,1)+chunkSize-1;
 end
 
+allWireSamps = zeros(chunkSize*numSigmaSegments*r_upsample,numCh);
+
 for iCh = 1 : numCh
     if validMask(iCh)
         disp(['Calculating sigma for ',sevNames{iCh}]);
         [sev, ~] = read_tdt_sev(sevNames{iCh}); 
-        parfor iChunk = 1 : numSigmaSegments
+        parfor iChunk = 1 : numSigmaSegments %parfor
             temp = sev(readSamps(iChunk,1) : readSamps(iChunk,2));
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);
             temp = wavefilter(temp', maxLevel);
-            SNLEdata = snle(temp, 1, ...
-                             'windowsize', windowSize, ...
-                             'snle_period', snle_T);
+            SNLEdata = snle(temp, 1,'windowsize', windowSize, 'snle_period', snle_T);
             wireSamps(iChunk,:) = SNLEdata;
         end
         allWireSamps(:,iCh) = wireSamps(:);
