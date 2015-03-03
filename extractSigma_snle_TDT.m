@@ -57,9 +57,13 @@ for iarg = 1 : 2 : nargin - 6
             maxSNLE = varargin{iarg + 1};
         case 'sincinterp_cutoff_fs',
             cutoff_Fs = varargin{iarg + 1};
+        % not implemented yet!
         case 'starttime',
-            startTime = varargin{iarg + 1};            % added in to make it possible to set start and end times for processing (for example, in case there was a long period before recording was initiated after turning on the software).
-%         case 'endtime',                                % this functionality has not been added to the code yet, though. -DL 12/15/2014
+            startTime = varargin{iarg + 1};            
+% parallel processing doesn't like endTime, because the
+% variable is used in extractSpikesTDT ? either rename it for each
+% file, or leave commented
+%         case 'endtime',                              
 %             endTime = varargin{iarg + 1};
         case 'snle_period',
             snle_T = varargin{iarg + 1};
@@ -144,9 +148,9 @@ for iChunk = 2 : numSigmaSegments
 end
 
 for iCh = 1 : numCh
-    disp(['Current channel: ',num2str(iCh)]);
-    if validMask(iCh)        
-        [sev, ~] = read_tdt_sev(sevNames{iCh});    
+    if validMask(iCh)
+        disp(['Calculating sigma for ',sevNames{iCh}]);
+        [sev, ~] = read_tdt_sev(sevNames{iCh}); 
         parfor iChunk = 1 : numSigmaSegments
             temp = sev(readSamps(iChunk,1) : readSamps(iChunk,2));
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);

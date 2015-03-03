@@ -222,7 +222,7 @@ end
 sevs = [];
 for iCh = 1 : numCh
     if validMask(iCh)
-        disp(['Building sev for ch',num2str(iCh)]);
+        disp(['Building sev for ',sevNames{iCh}]);
         [sevs(iCh,:), ~] = read_tdt_sev(sevNames{iCh});
     end
 end
@@ -263,11 +263,11 @@ for iBlock = 1:numBlocks
         interp_rawData = zeros(size(rawData, 1), size(rawData, 2) * r_upsample);
         for iCh = 1 : size(rawData, 1)
             if validMask(iCh)
-                interp_rawData(iCh, :) = sincInterp(rawData(iCh, :), Fs, ...      % upsample the raw data
+                interp_rawData(iCh, :) = sincInterp(rawData(iCh, :), Fs, ...
                     cutoff_Fs, final_Fs, 'sinclength', sincLength);
             end
         end
-        fdata = wavefilter(interp_rawData, maxLevel, 'validmask', validMask);       % high pass wavelet filtered data
+        fdata = wavefilter(interp_rawData, maxLevel, 'validmask', validMask);
     else
         % wavelet filter the raw data
         % Don't bother to do the calculations for noisy wires.
@@ -310,16 +310,15 @@ for iBlock = 1:numBlocks
 
     waveforms = extractWaveforms(fdata, block_ts, final_peakLoc, final_waveLength);
     ts = ts + upsampled_curSamp;
-    writePLXdatablock(PLXid, waveforms, ts);
+%     writePLXdatablock(PLXid, waveforms, ts);
 
-%     PLXdata{iBlock} = {waveforms ts};
-%     PLXdata{iBlock,2} = ts;   
+    PLXdata{iBlock} = {waveforms ts};
 end
 
 %tried this for parallel processing
-% for iBlock=1:numBlocks-1
-%     writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
-% end
+for iBlock=1:numBlocks-1
+    writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
+end
 
 fclose(PLXid);
 disp('PLX file closed...');

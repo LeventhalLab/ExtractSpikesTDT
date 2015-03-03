@@ -119,18 +119,13 @@ for iTet = 1 : length(tetrodeList)
 end
 
 % turn on parallel worker pool
-poolobj = parpool('local');
-
-if isempty(poolobj)
-    poolsize = 0;
-else
-    poolsize = poolobj.NumWorkers;
-end
-disp(['Pool size: ',num2str(poolsize)]);
+clusterInfo = parcluster('local');
+poolobj = parpool(clusterInfo, clusterInfo.NumWorkers);
+disp(['Pool size: ',num2str(clusterInfo.NumWorkers)]);
 
 tetChannels = tetChannels(1:numValidTets, :);
 tetWireStd = zeros(numValidTets, 4);
-parfor iTet = 1 : numValidTets
+parfor iTet = 1 : numValidTets %parfor
     % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
@@ -158,7 +153,7 @@ tet_thresholds  = rel_threshold * tetWireStd;
 % signal on each relevant wire - now time to do the thresholding!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-parfor iTet = 1 : length(tetrodeList)
+parfor iTet = 1 : length(tetrodeList) %parfor
      % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
