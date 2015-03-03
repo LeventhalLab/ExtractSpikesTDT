@@ -4,7 +4,7 @@ ant:
   <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing" />
   <mkdir dir="C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_redistribution_files_only" />
 </ant>
-mcc -C -o extractSpikesTDT -W WinMain:extractSpikesTDT -T link:exe -d C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing -v C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\TDTscripts\extract_PLXtimestamps_sincInterp_TDT.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\TDTscripts\extractSigma_snle_TDT.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\extractWaveforms.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\get_peaks.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\gettimestampsSNLE.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\TDTscripts\sincInterp_TDT.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\snle.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\sqlDB functions\sql_findNASpath.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\sqlDB functions\sql_getChannelMap.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\sqlDB functions\sql_getSubjectFromSession.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\wavefilter.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\writePLXChanHeader.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\writePLXdatablock.m' -a 'C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Data_workflow_leventhal\06_22_2013\matlab spikeworks\writePLXheader.m' 
+mcc -C -o extractSpikesTDT -W WinMain:extractSpikesTDT -T link:exe -d C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing -v C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m 
 Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\EEGPlot
 Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\data
 Directory permission denied: C:\Box Sync\Box Sync\Leventhal Lab\Leventhal lab software\m-files\Gaidica_spikeworks\MThal-master\spikeExtraction\matlab spikeworks
@@ -26,20 +26,20 @@ Compiler path instance.]
 Parsing file "C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m"
 	(Referenced from: "Compiler Command Line").
 Deleting 14 temporary MEX authorization files.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_20808_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_27226_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_4442_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_3436_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_32041_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_265_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_16211_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_7461_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_5712_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_7387_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_30025_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_8512_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_5333_6096.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_6096_8385_6096.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_22234_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_2874_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_22171_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_25271_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_27336_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_6551_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_5016_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_16375_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_8872_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_24157_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_28243_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_27104_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_28065_7620.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7620_13190_7620.auth'.
 Generating file "C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\readme.txt".
 Packaging...
 Adding custom icon C:\Program Files\MATLAB\R2014b\toolbox\compiler\Resources\default_icon.ico to C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\extractSpikesTDT.exe.
