@@ -78,23 +78,18 @@ for iarg = 1 : 2 : nargin - 1
     end
 end
 
- % override_nas_path determines whether or not MySQL is used, or
- % if the code will rely on a configuration file created by
- % exportSessionConf
- % !!!CHANGE!!! don't use MySQL if there's a conf
-if isempty(override_nas_path)
+if isempty(override_conf_path) % use MySQL
     [~, ratID] = sql_getSubjectFromSession(sessionName);
     chMap = sql_getChannelMap(ratID);
-    nasPath = sql_findNASpath(ratID);
     validMasks = sql_getAllTetChannels(sessionName);
+    nasPath = sql_findNASpath(ratID);
 else
+    load(override_conf_path); % use session config
+end
+% will cause error if conf file is used and override_nas_path is not
+% passed in, could handle more gracefully in future
+if ~isempty(override_nas_path)
     nasPath = override_nas_path;
-    if isempty(override_conf_path)
-        [f,p] = uigetfile({'.mat'},'Select the configuration file...');
-        load(fullfile(p,f));
-    else
-        load(override_conf_path);
-    end
 end
 
 if isempty(tetrodeList); tetrodeList = chMap.tetNames; end
