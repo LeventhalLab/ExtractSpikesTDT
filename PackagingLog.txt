@@ -26,20 +26,20 @@ Compiler path instance.]
 Parsing file "C:\Users\admin\Documents\MATLAB\ExtractSpikesTDT\extractSpikesTDT.m"
 	(Referenced from: "Compiler Command Line").
 Deleting 14 temporary MEX authorization files.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_12182_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_15899_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_25416_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_13063_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_293_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_16807_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_5821_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_19991_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_21733_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_2011_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_28425_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_30397_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_11407_5280.auth'.
-Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_5280_927_5280.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_32000_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_18144_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_18540_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_27904_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_3337_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_3725_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_1112_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_5733_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_7844_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_16552_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_2183_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_19610_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_9530_7080.auth'.
+Removing: 'C:\Users\admin\AppData\Local\Temp\mathworks_tmp_7080_11948_7080.auth'.
 Generating file "C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\readme.txt".
 Packaging...
 Adding custom icon C:\Program Files\MATLAB\R2014b\toolbox\compiler\Resources\default_icon.ico to C:\Users\admin\Documents\MATLAB\extractSpikesTDT\for_testing\extractSpikesTDT.exe.
