@@ -149,7 +149,6 @@ for iCh = 1 : numCh
     if validMask(iCh)        
         [sev, ~] = read_tdt_sev(sevNames{iCh});    
         parfor iChunk = 1 : numSigmaSegments
-            disp(['iChunk: ',num2str(iChunk)]);
             temp = sev(readSamps(iChunk,1) : readSamps(iChunk,2));
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);
             temp = wavefilter(temp', maxLevel);

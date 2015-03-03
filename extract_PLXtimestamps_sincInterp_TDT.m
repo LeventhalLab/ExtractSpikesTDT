@@ -212,7 +212,6 @@ for iCh = 1 : length(chList)
     writePLXChanHeader(PLXid, chInfo );
 end
 
-count3=0;
 % startSample = 1;
 % stopSample = round(Fs*10);
 % qtname = [sessionName '_' tetName '.mov'];
@@ -230,9 +229,7 @@ end
     
 
 PLXdata = {};
-numBlocks = 10;
-parfor iBlock = 1:numBlocks
-    count3=count3+1;
+for iBlock = 1:numBlocks
     disp(sprintf('Extracting waveforms for %s, block %d of %d', ...
                  tetName, ...
                  iBlock, ...
@@ -254,8 +251,6 @@ parfor iBlock = 1:numBlocks
     end
         
     stopSample = startSample + numSamples-1;
-    % get overlapSize samples on either side of each block to prevent edge
-    % effects (may not be that important, but it's easy to do)
     
     rawData = zeros(numCh, (stopSample - startSample + 1));
     for iCh = 1 : numCh
@@ -319,8 +314,8 @@ parfor iBlock = 1:numBlocks
     PLXdata{iBlock} = {waveforms ts};
     %PLXdata{iBlock,2} = ts;   
 end
-disp('parfor ended');
-for iBlock=1:numBlocks
+
+for iBlock=1:numBlocks-1
     writePLXdatablock(PLXid, PLXdata{iBlock}{1}, PLXdata{iBlock}{2});
 end
 
