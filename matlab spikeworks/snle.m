@@ -23,14 +23,16 @@ function y_snle = snle( y, goodWires, varargin )
 
 windowSize = 13;
 windowFunct = 'hanning';
+snle_T = 5;
 
 for iarg = 1 : 2 : nargin - 2
-    
     switch lower(varargin{iarg})
         case 'windowsize',
             windowSize = varargin{iarg + 1};
         case 'windowfunction',
             windowFunct = varargin{iarg + 1};
+        case 'snle_period'
+            snle_T = varargin{iarg + 1};
     end
     
 end
@@ -52,10 +54,9 @@ switch lower(windowFunct)
 end
 
 y_snle = y;
-T = 5;
-L = length(y)-(2*T);
+L = length(y)-(2*snle_T);
 % T variable added to extend window, 20150201 Matt Gaidica
-y_snle(:,1+T:end-T) = y(:,1+T:end-T).^2 - y(:,1:L) .* y(:,(end-L+1):end);
+y_snle(:,1+snle_T:end-snle_T) = y(:,1+snle_T:end-snle_T).^2 - y(:,1:L) .* y(:,(end-L+1):end);
 % old code below
 %y_snle(:, 2 : end-1) = y(:, 2 : end-1).^2 - y(:, 1 : end-2) .* y(:, 3 : end);
 
