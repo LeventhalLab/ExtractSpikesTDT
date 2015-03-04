@@ -62,11 +62,11 @@ for iDir = 1 : numDirs
         nexNames{iNex} = nexList(iNex).name;
     end
     
-    % get the sampling rate from the .hsdh file
-    hsdhName = dir('*.hsdh');
-    if isempty(hsdhName); continue; end
+    % using the NEX file, this is the upsampled rate, is that okay?
+    nexName = dir('*.nex');
+    if isempty(nexName); continue; end
     header = getHSDHeader(hsdhName(1).name);
-    Fs = header.main.sampling_rate;
+    Fs = nex_freq(nexName(1).name);
     
     combinedNex = combineNex_wf2012( nexNames, Fs, subdirs{iDir});
 
