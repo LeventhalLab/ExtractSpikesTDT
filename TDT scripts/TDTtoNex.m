@@ -24,7 +24,6 @@ function nexData = TDTtoNex(sessionName, varargin)
 
 [~, ratID] = sql_getSubjectFromSession(sessionName);
 nasPath = sql_findNASpath(ratID);
-% nasPath = '/Users/mattgaidica/Documents/Data/ChoiceTask';
 
 sessionTDTpath       = fullfile(nasPath, ratID, [ratID '-rawdata'], sessionName, sessionName);
 processedSessionPath = fullfile(nasPath, ratID, [ratID '-processed'], sessionName);
