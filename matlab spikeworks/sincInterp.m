@@ -21,7 +21,7 @@ function [y_interp, upsample_Fs] =  sincInterp(y, Fs,  cutoff_Fs, upsample_Fs, v
 %       from the INPUT variable upsample_Fs if the supplied target upsampled
 %       rate is not an integer multiple of Fs
 
-sincLength = 12; 
+sincLength = 48; 
 
 for iarg = 1 : 2 : nargin - 4
     switch lower(varargin{iarg})

@@ -14,7 +14,7 @@ function extractSpikesTDT(sessionName, varargin)
 %   'numsigmasegments'                                                  % NEED TO ADD IN THE REST OF THE VARARGS
 
 tetrodeList      = {};
-rel_threshold    = 10;   % in units of standard deviation
+rel_threshold    = 8;   % in units of standard deviation
 numSigmaSegments = 60;  % number of segments to use to calculate the standard deviation of the signal on each wire
 sigmaChunkLength = 1;   % duration in seconds of data chunks to use to extract the standard deviations of the wavelet-filtered signals
 snle_window      = 48;    % Alex's default
@@ -121,14 +121,14 @@ for iTet = 1 : length(tetrodeList)
 end
 
 % turn on parallel worker pool
-clusterInfo = parcluster('local');
-poolobj = parpool(clusterInfo, clusterInfo.NumWorkers);
-disp(['Pool size: ',num2str(clusterInfo.NumWorkers)]);
+% clusterInfo = parcluster('local');
+% poolobj = parpool(clusterInfo, clusterInfo.NumWorkers);
+% disp(['Pool size: ',num2str(clusterInfo.NumWorkers)]);
 
 tetChannels = tetChannels(1:numValidTets, :);
 tetWireStd = zeros(numValidTets, 4);
-% for iTet = 1 : numValidTets %debug line
-parfor iTet = 1 : numValidTets
+for iTet = 1 : numValidTets %debug line
+% parfor iTet = 1 : numValidTets
     % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
@@ -156,8 +156,8 @@ tet_thresholds  = rel_threshold * tetWireStd;
 % signal on each relevant wire - now time to do the thresholding!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% for iTet = 1 : length(tetrodeList) %debug line
-parfor iTet = 1 : length(tetrodeList)
+for iTet = 1 : length(tetrodeList) %debug line
+% parfor iTet = 1 : length(tetrodeList)
      % check for valid channels
     if ~any(validMasks(iTet,:))
         disp(['Skipping ' sessionName ', tetrode ' tetrodeList{iTet} ' - no valid channels']);
@@ -177,4 +177,4 @@ parfor iTet = 1 : length(tetrodeList)
         'snle_period', snle_T);
 end
 
-delete(poolobj);
+% delete(poolobj);

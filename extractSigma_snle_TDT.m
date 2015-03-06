@@ -152,7 +152,7 @@ for iCh = 1 : numCh
     if validMask(iCh)
         disp(['Calculating sigma for ',sevNames{iCh}]);
         [sev, ~] = read_tdt_sev(sevNames{iCh}); 
-        parfor iChunk = 1 : numSigmaSegments %parfor
+        for iChunk = 1 : numSigmaSegments %parfor
             temp = sev(readSamps(iChunk,1) : readSamps(iChunk,2));
             temp = sincInterp(temp, Fs, cutoff_Fs, final_Fs, 'sinclength', sincLength);
             temp = wavefilter(temp', maxLevel);

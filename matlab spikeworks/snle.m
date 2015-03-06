@@ -1,4 +1,4 @@
-function y_snle = snle( y, goodWires, varargin )
+function y_snle = snle(y, goodWires, varargin )
 %
 % usage: y_snle = snle( y, varargin )
 %
@@ -21,9 +21,9 @@ function y_snle = snle( y, goodWires, varargin )
 %   Energy Operator and Its Efficacy is Spike Detection",
 %   IEEE Trans Biomed Eng, 1998
 
-windowSize = 13;
+windowSize = 10;
 windowFunct = 'hanning';
-snle_T = 5;
+snle_T = 3;
 
 for iarg = 1 : 2 : nargin - 2
     switch lower(varargin{iarg})

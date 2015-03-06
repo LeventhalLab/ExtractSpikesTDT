@@ -173,7 +173,7 @@ for iNex = 1 : length(nexfn)
                 
             case 3, % waveform
                 % first, check to see if this waveform already exists
-                if ~isempty(nexData.waves)
+                if isfield(nexData,'waves') && ~isempty(nexData.waves)
                     exitFlag = 0;
                     for iWave = 1 : numWaveforms
                         if strcmpi(nexData.waves{iWave}.name, curName)

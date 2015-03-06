@@ -191,7 +191,7 @@ writePLXheader(PLXid, plxInfo );
 % dateString  = sprintf('%04d%02d%02d', plxInfo.year, plxInfo.month, plxInfo.day);
 % baseName    = [subjectName dateString];
 
-for iCh = 1 : length(chList)
+for iCh=1:length(chList)
    
     chInfo.tetName  = [sessionName '_' tetName];
     chInfo.wireName = sprintf('%s_W%02d', chInfo.tetName, iCh);

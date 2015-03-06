@@ -62,13 +62,12 @@ for iDir = 1 : numDirs
         nexNames{iNex} = nexList(iNex).name;
     end
     
-    % using the NEX file, this is the upsampled rate, is that okay?
-    nexName = dir('*.nex');
-    if isempty(nexName); continue; end
-    header = getHSDHeader(hsdhName(1).name);
-    Fs = nex_freq(nexName(1).name);
+    % using the PLX file for Fs, this is upsampled (48828)
+    plxName = dir('*.plx');
+    if isempty(plxName); continue; end
+    [~, ~, Fs, ~, ~, ~, ~, ~, ~, ~, ~, ~, ~] = plx_information(plxName(1).name);
     
-    combinedNex = combineNex_wf2012( nexNames, Fs, subdirs{iDir});
+    combinedNex = combineNex_wf2012(nexNames, Fs, subdirs{iDir});
 
     
     combinedNexName = [subdirs{iDir} '.nex'];
